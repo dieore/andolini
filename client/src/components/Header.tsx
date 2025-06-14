@@ -53,38 +53,40 @@ export function Header() {
               </button>
             </div>
           ) : (
-            <div className="hidden md:block">
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  // Decode JWT token to get user info
-                  const base64Url = credentialResponse.credential?.split('.')[1];
-                  if (base64Url) {
-                    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-                    const jsonPayload = decodeURIComponent(
-                      atob(base64)
-                        .split('')
-                        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-                        .join('')
-                    );
-                    const userData = JSON.parse(jsonPayload);
-                    setUser({
-                      name: userData.name,
-                      email: userData.email,
-                      picture: userData.picture,
-                      googleId: userData.sub
-                    });
-                  }
-                }}
-                onError={() => {
-                  console.error('Login Failed');
-                }}
-                text="signin"
-                shape="rectangular"
-                theme="outline"
-                size="medium"
-                width="120"
-                logo_alignment="left"
-              />
+            <div className="flex items-center">
+              <div className="w-[140px]">
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    // Decode JWT token to get user info
+                    const base64Url = credentialResponse.credential?.split('.')[1];
+                    if (base64Url) {
+                      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                      const jsonPayload = decodeURIComponent(
+                        atob(base64)
+                          .split('')
+                          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+                          .join('')
+                      );
+                      const userData = JSON.parse(jsonPayload);
+                      setUser({
+                        name: userData.name,
+                        email: userData.email,
+                        picture: userData.picture,
+                        googleId: userData.sub
+                      });
+                    }
+                  }}
+                  onError={() => {
+                    console.error('Login Failed');
+                  }}
+                  text="signin"
+                  shape="rectangular"
+                  theme="outline"
+                  size="medium"
+                  width="auto"
+                  logo_alignment="left"
+                />
+              </div>
             </div>
           )}
           
