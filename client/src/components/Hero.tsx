@@ -8,13 +8,13 @@ export function Hero() {
       </div>
       <div className="container px-4 relative z-10 text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-          Freshly Baked Happiness
+          Felicidad Recién Horneada
         </h2>
         <p className="text-xl text-white mb-8 max-w-xl mx-auto">
-          Handcrafted with love, baked to perfection every morning.
+          Elaborado artesanalmente con amor, horneado a la perfección cada mañana.
         </p>
         <Link to="/products" className="bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-8 rounded-full shadow-lg transition-colors inline-block">
-          Order Now
+          Ordenar Ahora
         </Link>
       </div>
     </section>;

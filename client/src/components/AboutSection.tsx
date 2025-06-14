@@ -5,26 +5,26 @@ export function AboutSection() {
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="w-full md:w-1/2 order-2 md:order-1">
             <h2 className="text-2xl md:text-3xl font-bold text-amber-800 mb-4">
-              Our Story
+              Nuestra Historia
             </h2>
             <p className="text-amber-900 mb-4">
-              Sweet Delights was founded in 2010 with a simple mission: to bring
-              the joy of freshly baked goods to our community. What started as a
-              small family bakery has grown into a beloved local institution.
+              Andolini nació en 2010 con una clara inspiración en la rica tradición panadera italiana.
+              Lo que comenzó como un pequeño rincón de sabores auténticos se ha convertido en un
+              referente de la panadería artesanal en nuestra comunidad.
             </p>
             <p className="text-amber-900 mb-4">
-              Every day, our bakers arrive before dawn to prepare the day's
-              offerings, using only the finest ingredients and traditional
-              methods passed down through generations.
+              Cada mañana, nuestros maestros panaderos inician su jornada antes del amanecer,
+              siguiendo recetas tradicionales italianas y utilizando ingredientes selectos
+              para ofrecer productos de la más alta calidad.
             </p>
             <p className="text-amber-900">
-              We take pride in our craft and are committed to creating baked
-              goods that not only taste amazing but also bring people together
-              around the table.
+              En Andolini, mantenemos viva la pasión por la auténtica panadería italiana,
+              creando experiencias que van más allá del simple placer de comer,
+              convirtiendo cada bocado en un viaje a los sabores más puros de Italia.
             </p>
           </div>
           <div className="w-full md:w-1/2 order-1 md:order-2 mb-6 md:mb-0">
-            <img src="https://images.unsplash.com/photo-1556711905-b3f402e1f74d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Bakery interior" className="rounded-lg shadow-lg w-full h-auto object-cover" />
+            <img src="https://images.unsplash.com/photo-1568254183919-78a4f43a2877?q=80&w=3269&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Bakery interior" className="rounded-lg shadow-lg w-full h-auto object-cover" />
           </div>
         </div>
       </div>

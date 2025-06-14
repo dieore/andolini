@@ -3,20 +3,20 @@ import { toast } from 'sonner';
 import { useCartStore } from '../store/cartStore';
 const categories = [{
   id: 'bread',
-  name: 'Bread'
+  name: 'Pan'
 }, {
   id: 'pastries',
-  name: 'Pastries'
+  name: 'Pastelería'
 }, {
   id: 'cakes',
-  name: 'Cakes'
+  name: 'Tortas'
 }, {
   id: 'cookies',
-  name: 'Cookies'
+  name: 'Galletas'
 }];
 const products = [{
   id: 1,
-  name: 'Sourdough Bread',
+  name: 'Pan de Masa Madre',
   price: 6.99,
   category: 'bread',
   image: 'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80'
@@ -28,25 +28,25 @@ const products = [{
   image: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80'
 }, {
   id: 3,
-  name: 'Chocolate Croissant',
+  name: 'Croissant de Chocolate',
   price: 3.99,
   category: 'pastries',
   image: 'https://images.unsplash.com/photo-1530610476181-d83430b64dcd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80'
 }, {
   id: 4,
-  name: 'Vanilla Cake',
+  name: 'Torta de Vainilla',
   price: 24.99,
   category: 'cakes',
   image: 'https://images.unsplash.com/photo-1535141192574-5d4897c12636?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80'
 }, {
   id: 5,
-  name: 'Chocolate Chip Cookies',
+  name: 'Galletas con Chips de Chocolate',
   price: 2.99,
   category: 'cookies',
   image: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
 }, {
   id: 6,
-  name: 'Danish Pastry',
+  name: 'Pastel Danés',
   price: 3.99,
   category: 'pastries',
   image: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80'

@@ -1,93 +1,142 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { GoogleLogin } from '@react-oauth/google';
+import { useEffect } from 'react';
+import { UseFormReturn } from 'react-hook-form';
 import { Map } from './Map';
-interface DeliveryFormData {
+import { useUserStore } from '../../store/userStore';
+
+export interface DeliveryFormData {
   name: string;
   email: string;
   phone: string;
   address: string;
   notes: string;
 }
-export function DeliveryForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: {
-      errors
+
+interface DeliveryFormProps {
+  formMethods: UseFormReturn<DeliveryFormData>;
+}
+
+export function DeliveryForm({ formMethods }: DeliveryFormProps) {
+  const { user } = useUserStore();
+  const { register, formState: { errors }, setValue } = formMethods;
+
+  // Pre-fill form with user data if available
+  useEffect(() => {
+    if (user) {
+      setValue('name', user.name);
+      setValue('email', user.email);
+      // You might want to store these in the user profile later
+      setValue('phone', '');
+      setValue('address', '');
+      setValue('notes', '');
     }
-  } = useForm<DeliveryFormData>();
-  const onSubmit = (data: DeliveryFormData) => {
-    console.log(data);
-  };
-  return <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-bold text-amber-800 mb-6">
-        Información de Entrega
-      </h2>
-      <div className="mb-6">
-        <GoogleLogin onSuccess={credentialResponse => {
-        console.log(credentialResponse);
-      }} onError={() => {
-        console.log('Login Failed');
-      }} />
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-amber-800 mb-1">
-            Nombre completo
-          </label>
-          <input {...register('name', {
-          required: 'Este campo es requerido'
-        })} type="text" id="name" className="w-full p-2 border border-amber-200 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500" />
-          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
-        </div>
-        <div>
-          <label htmlFor="email" className="block text-amber-800 mb-1">
-            Email
-          </label>
-          <input {...register('email', {
-          required: 'Este campo es requerido',
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Email inválido'
-          }
-        })} type="email" id="email" className="w-full p-2 border border-amber-200 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500" />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
-        </div>
-        <div>
-          <label htmlFor="phone" className="block text-amber-800 mb-1">
-            Teléfono
-          </label>
-          <input {...register('phone', {
-          required: 'Este campo es requerido'
-        })} type="tel" id="phone" className="w-full p-2 border border-amber-200 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500" />
-          {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
-        </div>
-        <div className="mb-4">
-          <label className="block text-amber-800 mb-1">
-            Selecciona ubicación de entrega
-          </label>
-          <div className="h-64 rounded-md overflow-hidden border border-amber-200">
+  }, [user, setValue]);
+
+  // No need for separate validation here as it's handled by the parent
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-xl font-bold text-amber-800 mb-6">
+          Información de Entrega
+        </h2>
+        
+        <div className="space-y-4">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-amber-800 mb-1">
+              Nombre Completo *
+            </label>
+            <input
+              id="name"
+              type="text"
+              {...register('name', { required: 'Este campo es obligatorio' })}
+              className={`w-full px-3 py-2 border rounded-md ${errors.name ? 'border-red-500' : 'border-amber-200'}`}
+              disabled={!!user}
+            />
+            {errors.name && (
+              <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-amber-800 mb-1">
+              Email *
+            </label>
+            <input
+              id="email"
+              type="email"
+              {...register('email', {
+                required: 'Este campo es obligatorio',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Email inválido',
+                },
+              })}
+              className={`w-full px-3 py-2 border rounded-md ${errors.email ? 'border-red-500' : 'border-amber-200'}`}
+              disabled={!!user}
+            />
+            {errors.email && (
+              <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-amber-800 mb-1">
+              Teléfono *
+            </label>
+            <input
+              id="phone"
+              type="tel"
+              {...register('phone', {
+                required: 'Este campo es obligatorio',
+                pattern: {
+                  value: /^[0-9+\-\s()]*$/,
+                  message: 'Número de teléfono inválido',
+                },
+              })}
+              className={`w-full px-3 py-2 border rounded-md ${errors.phone ? 'border-red-500' : 'border-amber-200'}`}
+            />
+            {errors.phone && (
+              <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="address" className="block text-sm font-medium text-amber-800 mb-1">
+              Dirección de Entrega *
+            </label>
+            <input
+              id="address"
+              type="text"
+              {...register('address', { required: 'Este campo es obligatorio' })}
+              className={`w-full px-3 py-2 border rounded-md ${errors.address ? 'border-red-500' : 'border-amber-200'}`}
+              placeholder="Calle, número, piso, departamento"
+            />
+            {errors.address && (
+              <p className="mt-1 text-sm text-red-600">{errors.address.message}</p>
+            )}
+          </div>
+
+          <div className="h-64">
             <Map />
+            <p className="text-xs text-gray-500 mt-1 text-center">
+              Área de cobertura de entrega
+            </p>
+          </div>
+
+          <div>
+            <label htmlFor="notes" className="block text-sm font-medium text-amber-800 mb-1">
+              Notas adicionales (opcional)
+            </label>
+            <textarea
+              id="notes"
+              {...register('notes')}
+              rows={3}
+              className="w-full px-3 py-2 border border-amber-200 rounded-md"
+              placeholder="Indicaciones especiales para la entrega"
+            />
           </div>
         </div>
-        <div>
-          <label htmlFor="address" className="block text-amber-800 mb-1">
-            Dirección detallada
-          </label>
-          <textarea {...register('address', {
-          required: 'Este campo es requerido'
-        })} id="address" rows={3} className="w-full p-2 border border-amber-200 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500" />
-          {errors.address && <p className="text-red-500 text-sm mt-1">
-              {errors.address.message}
-            </p>}
-        </div>
-        <div>
-          <label htmlFor="notes" className="block text-amber-800 mb-1">
-            Notas adicionales
-          </label>
-          <textarea {...register('notes')} id="notes" rows={2} className="w-full p-2 border border-amber-200 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500" />
-        </div>
-      </form>
-    </div>;
+      </div>
+    </div>
+  );
 }

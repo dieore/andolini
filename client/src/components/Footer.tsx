@@ -5,9 +5,9 @@ export function Footer() {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">Sweet Delights</h3>
+            <h3 className="text-xl font-bold mb-4">Andolini</h3>
             <p className="mb-4">
-              Bringing freshly baked happiness to your day.
+              Auténtica panadería italiana hecha con pasión y tradición.
             </p>
             <div className="flex space-x-4">
               <a href="#" aria-label="Instagram" className="hover:text-white">
@@ -22,10 +22,10 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <h3 className="text-xl font-bold mb-4">Contact Us</h3>
+            <h3 className="text-xl font-bold mb-4">Contáctenos</h3>
             <div className="flex items-center mb-3">
               <MapPin size={18} className="mr-2" />
-              <p>123 Bakery Street, Flour City</p>
+              <p>123 Via Roma, Barrio Italiano</p>
             </div>
             <div className="flex items-center mb-3">
               <Phone size={18} className="mr-2" />
@@ -33,25 +33,24 @@ export function Footer() {
             </div>
             <div className="flex items-center">
               <Mail size={18} className="mr-2" />
-              <p>hello@sweetdelights.com</p>
+              <p>hola@andolini.com</p>
             </div>
           </div>
           <div>
-            <h3 className="text-xl font-bold mb-4">Hours</h3>
+            <h3 className="text-xl font-bold mb-4">Horario</h3>
             <div className="flex items-center mb-3">
               <Clock size={18} className="mr-2" />
               <div>
-                <p>Monday - Friday: 7am - 7pm</p>
-                <p>Saturday: 8am - 8pm</p>
-                <p>Sunday: 8am - 6pm</p>
+                <p>Lunes a Viernes: 7am - 7pm</p>
+                <p>Sábado: 8am - 8pm</p>
+                <p>Domingo: 8am - 6pm</p>
               </div>
             </div>
           </div>
         </div>
         <div className="border-t border-amber-700 mt-8 pt-6 text-center">
           <p>
-            &copy; {new Date().getFullYear()} Sweet Delights Bakery. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} Panadería Andolini. Todos los derechos reservados.
           </p>
         </div>
       </div>

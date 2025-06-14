@@ -9,8 +9,9 @@ import { AboutSection } from './components/AboutSection';
 import { Footer } from './components/Footer';
 import { Toaster } from 'sonner';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { RecipesCarousel } from './components/RecipesCarousel';
 export function App() {
-  return <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+  return <GoogleOAuthProvider clientId="510479026102-7gd0cqsqghnmouhjru33etlvgm3dbbtg.apps.googleusercontent.com">
       <BrowserRouter>
         <div className="flex flex-col min-h-screen bg-amber-50">
           <Header />
@@ -18,6 +19,7 @@ export function App() {
             <Route path="/" element={<main className="flex-grow">
                   <Hero />
                   <FeaturedProducts />
+                  <RecipesCarousel />
                   <AboutSection />
                 </main>} />
             <Route path="/products" element={<ProductsPage />} />
