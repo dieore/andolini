@@ -59,22 +59,24 @@ export function CheckoutPage() {
 
   return (
     <main className="flex-grow py-8 px-4 bg-amber-50">
-      <div className="container mx-auto">
-        <h1 className="text-3xl font-bold text-amber-800 mb-8 text-center">
+      <div className="container mx-auto max-w-6xl px-0 sm:px-4">
+        <h1 className="text-3xl font-bold text-amber-800 mb-8 text-center px-4 sm:px-0">
           Finalizar Compra
         </h1>
         <form onSubmit={onFormSubmit} className="space-y-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="lg:col-span-1 bg-white p-6 rounded-lg shadow-md">
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6 md:gap-8 w-full">
+            <div className="w-full bg-white p-4 sm:p-8 rounded-lg shadow-md">
               <DeliveryForm formMethods={formMethods} />
             </div>
-            <div className="lg:col-span-1">
-              <OrderSummary 
-                items={items} 
-                total={total} 
-                onSubmit={onOrderButtonClick}
-                isSubmitting={isSubmitting}
-              />
+            <div className="w-full">
+              <div className="sticky top-24">
+                <OrderSummary 
+                  items={items} 
+                  total={total} 
+                  onSubmit={onOrderButtonClick}
+                  isSubmitting={isSubmitting}
+                />
+              </div>
             </div>
           </div>
         </form>

@@ -40,7 +40,7 @@ export function Map({ className = '', style = {} }: MapProps) {
     if (isClient && mapRef.current) {
       const map = mapRef.current;
       
-      // Disable interactions
+      // Disable all interactions
       map.dragging.disable();
       map.touchZoom.disable();
       map.doubleClickZoom.disable();
@@ -48,6 +48,12 @@ export function Map({ className = '', style = {} }: MapProps) {
       map.boxZoom.disable();
       map.keyboard.disable();
       if ('tap' in map) (map as any).tap.disable();
+      
+      // Disable zoom control
+      map.zoomControl.remove();
+      
+      // Disable right-click context menu
+      map.on('contextmenu', (e) => e.originalEvent.preventDefault());
       
       setMapReady(true);
     }
@@ -67,9 +73,11 @@ export function Map({ className = '', style = {} }: MapProps) {
           height: '100%',
           width: '100%',
           zIndex: 0,
+          borderRadius: '0.5rem',
+          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
         }}
         zoomControl={false}
-        className="select-none"
+        className="select-none overflow-hidden"
         ref={(map) => {
           if (map) {
             mapRef.current = map;

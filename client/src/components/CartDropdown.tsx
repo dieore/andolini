@@ -11,7 +11,7 @@ export function CartDropdown() {
     toggleCart
   } = useCartStore();
   if (!isOpen) return null;
-  return <div className="absolute top-full right-0 mt-2 w-96 bg-white rounded-lg shadow-lg z-50 p-4">
+  return <div className="fixed sm:absolute top-16 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-4 mt-2 w-[90vw] sm:w-96 bg-white rounded-lg shadow-lg z-50 p-4">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-bold text-amber-800">Carrito</h3>
         <button onClick={toggleCart} className="text-amber-800 hover:text-amber-600" aria-label="Cerrar carrito">

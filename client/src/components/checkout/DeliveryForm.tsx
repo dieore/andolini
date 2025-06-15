@@ -116,9 +116,9 @@ export function DeliveryForm({ formMethods }: DeliveryFormProps) {
             )}
           </div>
 
-          <div className="h-64">
+          <div className="h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden">
             <Map />
-            <p className="text-xs text-gray-500 mt-1 text-center">
+            <p className="text-xs text-gray-500 mt-2 text-center">
               Área de cobertura de entrega
             </p>
           </div>

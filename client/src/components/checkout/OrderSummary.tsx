@@ -13,7 +13,7 @@ export function OrderSummary({ items, total, onSubmit, isSubmitting }: OrderSumm
   const finalTotal = total + deliveryFee;
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 rounded-lg shadow-md h-fit">
       <h2 className="text-xl font-bold text-amber-800 mb-6">
         Resumen del Pedido
       </h2>
