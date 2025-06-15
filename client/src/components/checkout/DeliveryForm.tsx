@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { UseFormReturn } from 'react-hook-form';
+import { UseFormReturn, FieldErrors } from 'react-hook-form';
 import { Map } from './Map';
 import { useUserStore } from '../../store/userStore';
 
@@ -13,11 +13,15 @@ export interface DeliveryFormData {
 
 interface DeliveryFormProps {
   formMethods: UseFormReturn<DeliveryFormData>;
+  errors: FieldErrors<DeliveryFormData>;
 }
 
-export function DeliveryForm({ formMethods }: DeliveryFormProps) {
+export function DeliveryForm({ formMethods, errors: propErrors }: DeliveryFormProps) {
   const { user } = useUserStore();
-  const { register, formState: { errors }, setValue } = formMethods;
+  const { register, formState: { errors: formErrors }, setValue, clearErrors } = formMethods;
+  
+  // Combine form validation errors with our custom errors
+  const mergedErrors = { ...formErrors, ...propErrors };
 
   // Pre-fill form with user data if available
   useEffect(() => {
@@ -49,11 +53,12 @@ export function DeliveryForm({ formMethods }: DeliveryFormProps) {
               id="name"
               type="text"
               {...register('name', { required: 'Este campo es obligatorio' })}
-              className={`w-full px-3 py-2 border rounded-md ${errors.name ? 'border-red-500' : 'border-amber-200'}`}
+              className={`w-full px-3 py-2 border rounded-md ${mergedErrors.name ? 'border-red-500' : 'border-amber-200'}`}
               disabled={!!user}
+              onFocus={() => clearErrors('name')}
             />
-            {errors.name && (
-              <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+            {mergedErrors.name && (
+              <p className="mt-1 text-sm text-red-600">{String(mergedErrors.name.message)}</p>
             )}
           </div>
 
@@ -71,11 +76,12 @@ export function DeliveryForm({ formMethods }: DeliveryFormProps) {
                   message: 'Email inválido',
                 },
               })}
-              className={`w-full px-3 py-2 border rounded-md ${errors.email ? 'border-red-500' : 'border-amber-200'}`}
+              className={`w-full px-3 py-2 border rounded-md ${mergedErrors.email ? 'border-red-500' : 'border-amber-200'}`}
               disabled={!!user}
+              onFocus={() => clearErrors('email')}
             />
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+            {mergedErrors.email && (
+              <p className="mt-1 text-sm text-red-600">{String(mergedErrors.email.message)}</p>
             )}
           </div>
 
@@ -93,10 +99,11 @@ export function DeliveryForm({ formMethods }: DeliveryFormProps) {
                   message: 'Número de teléfono inválido',
                 },
               })}
-              className={`w-full px-3 py-2 border rounded-md ${errors.phone ? 'border-red-500' : 'border-amber-200'}`}
+              className={`w-full px-3 py-2 border rounded-md ${mergedErrors.phone ? 'border-red-500' : 'border-amber-200'}`}
+              onFocus={() => clearErrors('phone')}
             />
-            {errors.phone && (
-              <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+            {mergedErrors.phone && (
+              <p className="mt-1 text-sm text-red-600">{String(mergedErrors.phone.message)}</p>
             )}
           </div>
 
@@ -108,11 +115,11 @@ export function DeliveryForm({ formMethods }: DeliveryFormProps) {
               id="address"
               type="text"
               {...register('address', { required: 'Este campo es obligatorio' })}
-              className={`w-full px-3 py-2 border rounded-md ${errors.address ? 'border-red-500' : 'border-amber-200'}`}
-              placeholder="Calle, número, piso, departamento"
+              className={`w-full px-3 py-2 border rounded-md ${mergedErrors.address ? 'border-red-500' : 'border-amber-200'}`}
+              onFocus={() => clearErrors('address')}
             />
-            {errors.address && (
-              <p className="mt-1 text-sm text-red-600">{errors.address.message}</p>
+            {mergedErrors.address && (
+              <p className="mt-1 text-sm text-red-600">{String(mergedErrors.address.message)}</p>
             )}
           </div>
 
